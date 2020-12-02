@@ -13,7 +13,6 @@ function Banner() {
 
         <article>
           <h1>PANTERA NEGRA</h1>
-          <p>Clique na imagem e confira mais detalhes</p>
         </article>
       </Container>
     </>

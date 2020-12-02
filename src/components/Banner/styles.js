@@ -7,7 +7,10 @@ export const Container = styled.div`
   height: 400px;
   text-align: center;
   justify-content: center;
-  padding: 20px;
+
+  img {
+    height: 100%;
+  }
 
   article {
     h1 {

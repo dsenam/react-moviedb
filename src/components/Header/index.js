@@ -11,7 +11,6 @@ function Header() {
                 <Link to="/">
                   <BiCameraMovie />
                 </Link>
-              <button>Entrar</button>
         </Container>
     </>
   );

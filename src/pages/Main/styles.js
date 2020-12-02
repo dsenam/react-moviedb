@@ -38,68 +38,67 @@ export const HeaderContainer = styled.header`
 }
 `;
 
-export const ArticleContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-
-    div {
-       position: relative;
-
-      img {
-        width: 100%;
-        height: 500px;
-      }
-
-      h1 {
-        position: absolute;
-        font-weight: bold;
-        font-size: 32px;
-        color: white;
-        left: 50px;
-        top: 320px;
-      }
-
-      p {
-        position: absolute;
-        font-size: 20px;
-        color: white;
-        left: 50px;
-        top: 375px;
-        margin-right: 20px;
-      }
-
-    }
-    
-`;
-
 export const ListMovies = styled.div`
-  padding: 40px;
-  
+  padding: 70px;
 
-  h1 {
-    margin-bottom: 10px;
-  }
+  
 
   ul {
     display: flex;
     flex-wrap: wrap;
 
-  li {
+    li {
+
+      img {
+        height: 350px;
+        width: 300px;
+        border-radius: 8px;
+      }
+
       list-style: none;
       padding: 10px;
+      
 
-      button {
-        :hover {
-          opacity: 0.8;
+      div {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 300px;
+        background-color: white;
+
+        p {
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+
+        span {
+          color: #dcdcdc;
         }
       }
     }
+  }
+`;
 
+export const Actions = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding-right: 18px;
+
+  h1 {
+    margin: 20px;
   }
 
-  img {
-    height: 400px;
-    width: 280px;
-    border-radius: 5px;
+  button {
+    margin-top: 40px;
+    padding: 10px;
+    margin-left: 20px;
+
+    svg {
+      font-size: 30px;
+    }
   }
+
+  
+
+  ,
 `;

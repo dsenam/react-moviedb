@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import axios from 'axios'
-import { Container, ListMovies, Actions } from './styles';
-import { MdFastForward, MdFastRewind } from "react-icons/md";
+import api from '../../services/api'
+import {Loading} from './styles'
 
+import {FaSpinner} from 'react-icons/fa'
+
+import Banner from '../../components/Banner'
+import ListMovies from '../../components/ListMovies'
 
 function Main() {
   const apiKey = '7521b41284f1ad24823061811cf4b6e8'
@@ -14,17 +17,23 @@ function Main() {
 
  
   useEffect(()=> {
-    async function loadData() {
-      setLoading(true)
-      const response = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=pt-BR&page=${page}`)
-      
-      setMovies(response.data.results)
-      setTotalPages(response.data.total_pages)
-      setLoading(false)
-      
-    }
 
-    loadData()
+    try {
+      async function loadData() {
+        setLoading(true)
+        const response = await api.get(`popular?api_key=${apiKey}&language=pt-BR&page=${page}`)
+        
+        setMovies(response.data.results)
+        setTotalPages(response.data.total_pages)
+        setLoading(false)
+        
+      }
+      loadData()
+    } catch (error) {
+      console.log(error)
+    }
+    
+
     
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page])
@@ -43,47 +52,16 @@ function nextPage() {
 
 if(loading === true) {
   return (
-    <h1>Carregando...</h1>
+    <Loading>
+      <FaSpinner />
+    </Loading> 
   )
 }
 
-
   return (
       <>
-        <Container>
-            
-
-            <ListMovies>
-              <Actions>
-                <h1>Filmes Populares</h1>
-                <div>
-                  <button onClick={prevPage}>
-                  <MdFastRewind />
-                  </button>
-
-                  <button onClick={nextPage}>
-                  <MdFastForward />
-                  </button>
-                </div>
-               
-              </Actions>
-              <ul>
-                {movies.map(movie => (
-                  <li key={movie.id}>
-                    
-                    <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title}/>
-                    <div>
-                    <p>{movie.title}</p>
-                    <span>{movie.release_date}</span>
-                    <span>{movie.id}</span>
-                    </div> 
-                  
-                </li>
-                ))}
-                
-              </ul>
-            </ListMovies>
-        </Container>
+        <Banner />
+        <ListMovies movies={movies} prevPage={prevPage} nextPage={nextPage}/>
       </>
   );
 }

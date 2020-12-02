@@ -4,40 +4,6 @@ export const Container = styled.div`
   
 `;
 
-export const HeaderContainer = styled.header`
-  display: flex;
-  width: 100%;
-  height: 40px;
-  justify-content: space-between;
-  align-items: center;
-  background-color: black;
-  padding: 40px;
-
-  h1 {
-      color: white;
-  }
-
-  button {
-      background-color: transparent;
-      color: white;
-  }
-
-  form {
-    input {
-      margin-bottom: 30px;
-      margin-top: 20px;
-      width: 300px;
-      height: 30px;
-      border-radius: 7px;
-      
-      ::placeholder {
-          color: #DCDCDC;
-          padding: 10px;
-    }
-  }
-}
-`;
-
 export const ListMovies = styled.div`
   padding: 70px;
 
@@ -92,13 +58,11 @@ export const Actions = styled.div`
     margin-top: 40px;
     padding: 10px;
     margin-left: 20px;
+    background-color: transparent;
+    height: 30px;
 
     svg {
       font-size: 30px;
     }
   }
-
-  
-
-  ,
 `;

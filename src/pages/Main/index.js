@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios'
-import { Container, HeaderContainer, ListMovies, Actions } from './styles';
+import { Container, ListMovies, Actions } from './styles';
 import { MdFastForward, MdFastRewind } from "react-icons/md";
 
 
@@ -11,14 +11,17 @@ function Main() {
   const [totalPages, setTotalPages] = useState(0)
   const [loading, setLoading] = useState(true)
 
+
+ 
   useEffect(()=> {
     async function loadData() {
       setLoading(true)
       const response = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=pt-BR&page=${page}`)
-
-      setMovies([...movies, ...response.data.results])
+      
+      setMovies(response.data.results)
       setTotalPages(response.data.total_pages)
       setLoading(false)
+      
     }
 
     loadData()
@@ -27,31 +30,38 @@ function Main() {
   }, [page])
 
 
+function prevPage() {
+  if(page===1) return;
 
+  setPage(page - 1)
+}
+
+function nextPage() {
+  if(page === totalPages) return;
+    setPage(page + 1)
+}
+
+if(loading === true) {
+  return (
+    <h1>Carregando...</h1>
+  )
+}
 
 
   return (
       <>
         <Container>
-            <HeaderContainer>
-                <h1>React Movie</h1>
-                
-              <form>
-                <input type="text" placeholder="Digite o nome do filme" />
-              </form>
-
-              <button>Entrar</button>
-            </HeaderContainer>
+            
 
             <ListMovies>
               <Actions>
                 <h1>Filmes Populares</h1>
                 <div>
-                  <button>
+                  <button onClick={prevPage}>
                   <MdFastRewind />
                   </button>
 
-                  <button>
+                  <button onClick={nextPage}>
                   <MdFastForward />
                   </button>
                 </div>
@@ -65,6 +75,7 @@ function Main() {
                     <div>
                     <p>{movie.title}</p>
                     <span>{movie.release_date}</span>
+                    <span>{movie.id}</span>
                     </div> 
                   
                 </li>
